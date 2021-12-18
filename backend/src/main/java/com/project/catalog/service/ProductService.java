@@ -47,7 +47,7 @@ public class ProductService {
 	public ProductDTO update(Long id, ProductDTO dto) {
 		try {
 			Product product = productRepository.getById(id);
-			return new ProductDTO(productRepository.save(convertDtoToEntity(dto, product)));
+			return new ProductDTO(productRepository.save(convertDtoToEntity(dto, product)), product.getCategories());
 		} catch (EntityNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "produto não encontrado");
 		}
