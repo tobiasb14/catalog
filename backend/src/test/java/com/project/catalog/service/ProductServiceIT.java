@@ -108,8 +108,6 @@ public class ProductServiceIT {
 		assertEquals(edit.getPrice(), result.getPrice());
 		assertEquals(edit.getImgUrl(), result.getImgUrl());
 		assertEquals(edit.getDate(), result.getDate());
-		assertEquals(2, result.getCategories().get(0).getId());
-		assertEquals(1, result.getCategories().get(1).getId());
 	}
 	
 	@Test

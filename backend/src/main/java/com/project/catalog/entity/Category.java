@@ -41,7 +41,7 @@ public class Category {
 	@Setter(AccessLevel.NONE)
 	private Instant updatedAt;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "categories")
 	@Setter(AccessLevel.NONE)
 	Set<Product> products = new HashSet<>();
 	
