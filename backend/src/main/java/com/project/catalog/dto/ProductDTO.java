@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+
 import com.project.catalog.entity.Category;
 import com.project.catalog.entity.Product;
 
@@ -19,11 +24,17 @@ import lombok.NoArgsConstructor;
 public class ProductDTO {
 
 	private long id;
+	@NotBlank
 	private String name;
+	@NotBlank
 	private String description;
+	@Positive
 	private BigDecimal price;
+	@NotBlank
 	private String imgUrl;
+	@PastOrPresent
 	private Instant date;
+	@NotNull
 	private List<CategoryDTO> categories = new ArrayList<>();
 	
 	public ProductDTO(Product product) {

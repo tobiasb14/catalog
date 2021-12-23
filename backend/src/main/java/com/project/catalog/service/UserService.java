@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.project.catalog.dto.UserDTO;
 import com.project.catalog.dto.UserInsertDTO;
+import com.project.catalog.dto.UserUpdateDTO;
 import com.project.catalog.entity.User;
 import com.project.catalog.repository.RoleRepository;
 import com.project.catalog.repository.UserRepository;
@@ -49,7 +50,7 @@ public class UserService {
 	}
 
 	@Transactional
-	public UserDTO update(Long id, UserDTO dto) {
+	public UserDTO update(Long id, UserUpdateDTO dto) {
 		try {
 			User user = userRepository.getById(id);
 			return new UserDTO(userRepository.save(convertDtoToEntity(dto, user)));

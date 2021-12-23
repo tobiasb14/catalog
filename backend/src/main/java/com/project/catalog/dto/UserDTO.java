@@ -3,6 +3,9 @@ package com.project.catalog.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 import com.project.catalog.entity.User;
 
 import lombok.AllArgsConstructor;
@@ -15,8 +18,11 @@ import lombok.NoArgsConstructor;
 public class UserDTO {
 
 	private Long id;
+	@NotBlank
 	private String firstName;
+	@NotBlank
 	private String lastName;
+	@Email @NotBlank
 	private String email;
 	private List<RoleDTO> roles = new ArrayList<>();
 	
