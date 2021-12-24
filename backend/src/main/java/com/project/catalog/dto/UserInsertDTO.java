@@ -16,6 +16,6 @@ import lombok.NoArgsConstructor;
 public class UserInsertDTO extends UserDTO{
 
 	@NotBlank
-	@Size(min = 8, message = "senha muito curta")
+	@Size(min = 6, message = "senha muito curta")
 	private String password;
 }
