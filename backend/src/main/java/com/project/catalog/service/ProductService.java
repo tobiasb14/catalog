@@ -1,5 +1,7 @@
 package com.project.catalog.service;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.project.catalog.dto.ProductDTO;
+import com.project.catalog.entity.Category;
 import com.project.catalog.entity.Product;
 import com.project.catalog.repository.CategoryRepository;
 import com.project.catalog.repository.ProductRepository;
@@ -27,8 +30,9 @@ public class ProductService {
 	private final CategoryRepository categoryRepository;
 	
 	@Transactional(readOnly = true)
-	public Page<ProductDTO> findAllPaged(Pageable pageable) {
-		return productRepository.findAll(pageable).map(ProductDTO::new);
+	public Page<ProductDTO> findAllPagedWithCategoryAndName(Long categoryId, String name, Pageable pageable) {
+			List<Category> categories = (categoryId == null) ? null : Arrays.asList(categoryRepository.getById(categoryId));
+			return productRepository.findAllPagedWithCategoryAndName(pageable, name.trim(), categories).map(ProductDTO::new);
 	}
 
 	@Transactional(readOnly = true)

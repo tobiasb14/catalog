@@ -27,32 +27,32 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductController {
 
-private final ProductService ProductService;
+private final ProductService productService;
 	
 	@GetMapping
-	public ResponseEntity<Page<ProductDTO>> findAllPaged(Pageable pageable) {
-		return ResponseEntity.ok(ProductService.findAllPaged(pageable));
+	public ResponseEntity<Page<ProductDTO>> findAllPagedWithCategoryAndName(Long categoryId, String name, Pageable pageable) {
+		return ResponseEntity.ok(productService.findAllPagedWithCategoryAndName(categoryId, name, pageable));
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
-		return ResponseEntity.ok(ProductService.findById(id));
+		return ResponseEntity.ok(productService.findById(id));
 	}
 	
 	@PostMapping
 	public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto) {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(ProductService.insert(dto));
+		return ResponseEntity.created(uri).body(productService.insert(dto));
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<ProductDTO> update(@PathVariable Long id,@Valid @RequestBody ProductDTO dto) {
-		return ResponseEntity.ok(ProductService.update(id, dto));
+		return ResponseEntity.ok(productService.update(id, dto));
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		ProductService.delete(id);
+		productService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 }

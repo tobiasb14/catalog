@@ -53,7 +53,7 @@ public class ProductServiceIT {
 	
 	@Test
 	void findAllPagedShouldReturnPage() {
-		Page<ProductDTO> result = productService.findAllPaged(PageRequest.of(0, 10));
+		Page<ProductDTO> result = productService.findAllPagedWithCategoryAndName(null, "", PageRequest.of(0, 10));
 		
 		assertNotNull(result);
 		assertFalse(result.isEmpty());
@@ -64,13 +64,11 @@ public class ProductServiceIT {
 	
 	@Test
 	void findAllPagedShouldReturnPageOrderBy() {
-		Page<ProductDTO> result = productService.findAllPaged(PageRequest.of(0, 10, Sort.by("id")));
+		Page<ProductDTO> result = productService.findAllPagedWithCategoryAndName(correctId, "", PageRequest.of(0, 10, Sort.by("id")));
 		
 		assertNotNull(result);
 		assertFalse(result.isEmpty());
-		assertEquals(1L, result.getContent().get(0).getId());
-		assertEquals(2L, result.getContent().get(1).getId());
-		assertEquals(3L, result.getContent().get(2).getId());
+		assertEquals(2L, result.getContent().get(0).getId());
 	}
 	
 	@Test

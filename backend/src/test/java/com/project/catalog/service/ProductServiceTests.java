@@ -68,7 +68,7 @@ class ProductServiceTests {
 		editedProduct = new Product(correctId, "product2", "x", new BigDecimal(10), "xx", Instant.MIN, Set.of(category));
 		page = new PageImpl<>(List.of(product));
 		
-		when(productRepository.findAll(any(Pageable.class))).thenReturn(page);
+		when(productRepository.findAllPagedWithCategoryAndName(any(Pageable.class), any(String.class), any())).thenReturn(page);
 		when(productRepository.findById(correctId)).thenReturn(Optional.of(product));
 		when(productRepository.findById(wrongId)).thenReturn(Optional.empty());
 		when(productRepository.getById(correctId)).thenReturn(product);
@@ -81,12 +81,12 @@ class ProductServiceTests {
 	
 	@Test
 	void findAllPagedShouldReturnPage() {
-		Page<ProductDTO> result = productService.findAllPaged(PageRequest.of(0, 3));
+		Page<ProductDTO> result = productService.findAllPagedWithCategoryAndName(correctId, product.getName(), PageRequest.of(0, 3));
 		
 		assertNotNull(result);
 		assertEquals(1, result.getSize());
 		
-		verify(productRepository).findAll(PageRequest.of(0, 3));
+		verify(productRepository).findAllPagedWithCategoryAndName(any(Pageable.class), any(String.class), any());
 	}
 	
 	@Test
