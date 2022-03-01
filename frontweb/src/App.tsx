@@ -1,13 +1,10 @@
-import Navbar from 'components/Navbar';
 import './Assets/Styles/custom.scss';
 import './App.css';
+import Home from 'pages/Home';
 
 function App() {
   return (
-    <>
-    <Navbar />
-    <h1>hello catalog</h1>
-    </>
+    <Home />
   );
 }
 
